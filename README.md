@@ -7,26 +7,26 @@ eddy_file
 
 基于上一次卷积神经网络的介绍，我们在代码中实现一个基于MNIST数据集的例子
 首先我们导入
-'''
+'''python
 import tensorflow as tf
 '''
 采用的数据集依然是tensorflow里面的mnist数据集，我们需要先导入它
-'''
+'''python
 from tensorflow.examples.tutorials.mnist import input_data
 '''
 本次课程代码用到的数据集就是来自于它
-'''
+'''python
 mnist=input_data.read_data_sets('MNIST_data',one_hot=true)
 '''
 接着呢，我们定义Weights变量，输入shape，返回变量的参数。其中我们使用tf.truncted_normal产生随机变量来进行初始化。
 
-'''
+'''python
 def weight_variable(shape):
 	inital=tf.truncted_normal(shape,stddev=0.1)
 	return tf.Variable(initial)
 '''
 同样的定义biase变量，输入shape ,返回变量的一些参数。其中我们使用tf.constant常量函数来进行初始化。
-'''
+'''python
 def bias_variable(shape):
 	initial=tf.constant(0.1,shape=shape)
 	return tf.Variable(initial)
