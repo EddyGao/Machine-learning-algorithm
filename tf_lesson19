@@ -1,0 +1,40 @@
+基于上一次卷积神经网络的介绍，我们在代码中实现一个基于MNIST数据集的例子
+首先我们导入
+'''python
+import tensorflow as tf
+'''
+采用的数据集依然是tensorflow里面的mnist数据集，我们需要先导入它
+'''python
+from tensorflow.examples.tutorials.mnist import input_data
+'''
+本次课程代码用到的数据集就是来自于它
+'''python
+mnist=input_data.read_data_sets('MNIST_data',one_hot=true)
+'''
+接着呢，我们定义Weights变量，输入shape，返回变量的参数。其中我们使用tf.truncted_normal产生随机变量来进行初始化。
+
+'''python
+def weight_variable(shape):
+	inital=tf.truncted_normal(shape,stddev=0.1)
+	return tf.Variable(initial)
+'''
+同样的定义biase变量，输入shape ,返回变量的一些参数。其中我们使用tf.constant常量函数来进行初始化。
+'''python
+def bias_variable(shape):
+	initial=tf.constant(0.1,shape=shape)
+	return tf.Variable(initial)
+'''
+定义卷积，tf.nn.conv2d函数是tensoflow里面的二维的卷积函数，x是图片的所有参数，W是此卷积层的权重，然后定义步长strides=[1,1,1,1]值，strides[0]和strides[3]的两个1是默认值，中间两个1代表padding时在x方向运动一步，y方向运动一步，padding采用的方式是SAME。
+'''
+def conv2d(x,W)
+	#strides[1,x_movement,y_movement,1]
+	#Must have strides[0]=strides[3]=1
+	return tf.nn.conv2d(x,W,strides=[1,1,1,1]，padding='SAME')
+'''
+接着定义池化pooling，为了得到更多的图片信息，padding时我们选的是一次一步，也就是strides[1]=strides[2]=1，这样得到的图片尺寸没有变化，而我们希望压缩一下图片也就是参数能少一些从而减小系统的复杂度，因此我们采用pooling来稀疏化参数，也就是卷积神经网络中所谓的下采样层。pooling 有两种，一种是最大值池化，一种是平均值池化，本例采用的是最大值池化tf.max_pool()。池化的核函数大小为2x2，因此ksize=[1,2,2,1]，步长为2，因此strides=[1,2,2,1]
+'''
+def max_poo_2x2(x):
+	return tf.nn.max_pool(x,ksize=[1,2,2,1],strides=[1,2,2,1])
+	
+'''
+好啦，如果你对本节课内容已经了解，下一次课我们将构建卷积神经网络的架构~
