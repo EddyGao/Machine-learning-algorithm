@@ -55,9 +55,9 @@ def vis_detections(im, class_name, dets, ax, thresh=0.5):
         score = dets[i, -1]
 
         ax.add_patch(
-            plt.Rectangle((bbox[0], bbox[1]),
-                          bbox[2] - bbox[0],
-                          bbox[3] - bbox[1], fill=False,
+            plt.Rectangle((bbox[0], bbox[1]),#左下角坐标
+                          bbox[2] - bbox[0],#宽
+                          bbox[3] - bbox[1], fill=False,#高
                           edgecolor='red', linewidth=1) # 矩形线宽从3.5改为1
             )
         ax.text(bbox[0], bbox[1] - 2,
